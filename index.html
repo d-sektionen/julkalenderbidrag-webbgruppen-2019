@@ -7,7 +7,18 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <canvas width="800" height="500" id="c" onmousemove="mouseX(event)"></canvas>
+    <div class="main-grid">
+        <div class="frame canvas-wrapper">
+            <div class="text-wrapper">
+                <h2>
+                    Webbgruppen
+                </h2>
+            </div>
+            <canvas width="800" height="500" id="c" onmousemove="mouseX(event)"></canvas>
+        </div>
+
+        <aside class="frame sidebar"></aside>
+    </div>
     <script src="source.js"></script>
 </body>
 </html>

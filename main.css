@@ -1,3 +1,60 @@
-canvas{
-    background-color: lightgray;
+html {
+  height: 100%;
+  min-height: 700px;
+}
+
+body {
+  height: 100%;
+  background-color: darkgreen;
+  margin: 0;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: auto 200px;
+  grid-template-rows: auto;
+  justify-content: center;
+  align-content: center;
+  gap: 2rem;
+  height: 100%;
+}
+
+.canvas-wrapper {
+  position: relative;
+  background-color: lightgray;
+  background: OliveDrab;
+  background: radial-gradient(lightgreen, OliveDrab);
+}
+
+.canvas-wrapper canvas {
+  z-index: 1;
+  display: block;
+}
+
+.canvas-wrapper .text-wrapper {
+  z-index: -1;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.canvas-wrapper .text-wrapper h2 {
+  margin: 0;
+  font-style: italic;
+  font-size: 6rem;
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+  background-color: #bada55;
+}
+
+.frame {
+  border: greenyellow 1rem solid;
+  border-radius: 2rem;
 }
