@@ -11,16 +11,12 @@ var spawnInterval = 0.02
 
 var stage = 1;
 
-function mouseX(event){
-    xCoord = event.clientX;
+c.onmousemove = function(event){
+    rect = c.getBoundingClientRect();
+    xCoord = event.clientX - rect.left;
 }
 
-function circle(x,y){
-    ctx.beginPath();
-    ctx.arc(x, y, circleR, 0, 2 * Math.PI);
-    ctx.fillStyle= "red";
-    ctx.fill(); 
-}
+
 function rectangle(x,y){
     ctx.beginPath();
     ctx.rect(x, y, 100, 10);
@@ -74,7 +70,9 @@ class BottleCap{
         this.speed = randSpeed()
     }
     draw(){
-        circle(this.x,this.y);
+        var img = new Image();
+        img.src="cap.png"
+        ctx.drawImage(img,this.x - 20,this.y - 20);
     }
     move(){
         this.y += this.speed;
