@@ -27,12 +27,10 @@ body {
 }
 
 .canvas-wrapper canvas {
-  z-index: 1;
   display: block;
 }
 
 .canvas-wrapper .text-wrapper {
-  z-index: -1;
   position: absolute;
   pointer-events: none;
   display: flex;
@@ -44,8 +42,9 @@ body {
   right: 0;
 }
 .canvas-wrapper .text-wrapper h2 {
+  font-family: "Lobster", cursive;
   margin: 0;
-  font-style: italic;
+  /* font-style: italic; */
   font-size: 6rem;
   color: rgba(0, 0, 0, 0.1);
 }
