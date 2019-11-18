@@ -7,86 +7,90 @@ var totalScore = 0;
 var xCoord = 0;
 var circleR = 15;
 
-var spawnInterval = 0.02
+var spawnInterval = 0.02;
 
 var stage = 1;
 
-c.onmousemove = function(event){
-    rect = c.getBoundingClientRect();
-    xCoord = event.clientX - rect.left;
+capImg = new Image();
+capImg.src = "cap.png";
+
+c.onmousemove = function(event) {
+  rect = c.getBoundingClientRect();
+  xCoord = event.clientX - rect.left;
+};
+
+function rectangle(x, y) {
+  ctx.beginPath();
+  ctx.rect(x, y, 100, 10);
+  ctx.fillStyle = "darkred";
+  ctx.fill();
+}
+function randStartCoord() {
+  return Math.floor(Math.random() * 500) + 15;
+}
+function randSpeed() {
+  return Math.floor(Math.random() * 2 * stage) + 2;
+}
+function update() {
+  ctx.clearRect(0, 0, c.width, c.height);
+  player.x = xCoord - 50;
+  player.draw();
+
+  var spawnRandNum = Math.random();
+  if (spawnRandNum < spawnInterval) {
+    spawnCap();
+  }
+  for (let i = 0; i < caps.length; i++) {
+    const element = caps[i];
+    element.draw();
+    element.move();
+
+    if (element.y > c.height) {
+      caps.splice(i, 1);
+      lives--;
+    }
+    if (
+      player.y - element.y <= circleR &&
+      element.x - player.x < 100 &&
+      element.x - player.x > 0
+    ) {
+      caps.splice(i, 1);
+      totalScore += 100;
+      if (totalScore % 2000 == 0) {
+        stage++;
+        spawnInterval += 0.005;
+      }
+      console.log(totalScore);
+    }
+  }
 }
 
-
-function rectangle(x,y){
-    ctx.beginPath();
-    ctx.rect(x, y, 100, 10);
-    ctx.fillStyle= "darkred";
-    ctx.fill(); 
-}
-function randStartCoord(){
-    return Math.floor(Math.random() * 500) + 15;
-}
-function randSpeed(){
-    return Math.floor(Math.random() * 2*stage) + 2;
-}
-function update(){
-    ctx.clearRect(0, 0, c.width, c.height);
-    player.x = xCoord - 50;
-    player.draw();
-
-    var spawnRandNum = Math.random();
-    if (spawnRandNum < spawnInterval) {
-        spawnCap();
-    }
-    for (let i = 0; i < caps.length; i++) {
-        const element = caps[i];
-        element.draw();
-        element.move();
-
-        if (element.y > c.height){
-            caps.splice(i, 1);
-            lives--;
-        }
-        if (player.y - element.y <= circleR && element.x - player.x < 100 && element.x - player.x > 0) {
-            caps.splice(i, 1);
-            totalScore += 100;
-            if (totalScore % 2000 == 0) {
-                stage++;
-                spawnInterval += 0.005;
-            }
-            console.log(totalScore)
-        }
-    }
+function spawnCap() {
+  caps.push(new BottleCap(randStartCoord(), 0));
 }
 
-function spawnCap(){
-    caps.push(new BottleCap(randStartCoord(),0));
+class BottleCap {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.speed = randSpeed();
+  }
+  draw() {
+    ctx.drawImage(capImg, this.x - 20, this.y - 20);
+  }
+  move() {
+    this.y += this.speed;
+  }
 }
 
-class BottleCap{
-    constructor(x,y){
-        this.x = x;
-        this.y = y;
-        this.speed = randSpeed()
-    }
-    draw(){
-        var img = new Image();
-        img.src="cap.png"
-        ctx.drawImage(img,this.x - 20,this.y - 20);
-    }
-    move(){
-        this.y += this.speed;
-    }
-}
-
-class Cup{
-    constructor(){
-        this.x = 30; 
-        this.y = c.height-60;
-    }
-    draw(){
-        rectangle(this.x,this.y) 
-    }
+class Cup {
+  constructor() {
+    this.x = 30;
+    this.y = c.height - 60;
+  }
+  draw() {
+    rectangle(this.x, this.y);
+  }
 }
 var caps = [];
 var player = new Cup();
