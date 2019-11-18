@@ -5,9 +5,21 @@
     <meta charset="utf-8">
     <title>Webbgruppens lucka</title>
     <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <canvas width="800" height="500" id="c" onmousemove="getX(event)"></canvas>
+    <div class="main-grid">
+        <div class="frame canvas-wrapper">
+            <div class="text-wrapper">
+                <h2>
+                    Webbgruppen
+                </h2>
+            </div>
+            <canvas width="800" height="500" id="c" onmousemove="getX(event)"></canvas>
+        </div>
+
+        <aside class="frame sidebar"></aside>
+    </div>
     <script src="source.js"></script>
 </body>
 </html>
