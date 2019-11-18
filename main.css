@@ -21,7 +21,6 @@ body {
 
 .canvas-wrapper {
   position: relative;
-  background-color: lightgray;
   background: hsla(112, 50%, 50%, 0.8);
   background: radial-gradient(
     hsla(112, 50%, 50%, 0.8),
@@ -31,6 +30,17 @@ body {
 
 .canvas-wrapper canvas {
   display: block;
+}
+
+.canvas-wrapper .score {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font: "sans-serif";
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 2rem;
 }
 
 .canvas-wrapper .text-wrapper {

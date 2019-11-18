@@ -1,15 +1,31 @@
 var c = document.getElementById("c");
 var ctx = c.getContext("2d");
 
+class Score {
+  constructor() {
+    this.value = 0;
+    this.scoreCounter = document.getElementById("scoreCounter");
+  }
+
+  getStage() {
+    return Math.floor(this.value / 2000) + 1;
+  }
+
+  getSpawnInterval() {
+    return 0.02 + Math.floor(this.value / 2000) * 0.005;
+  }
+
+  add(amount) {
+    this.value += amount;
+    this.scoreCounter.textContent = this.value;
+  }
+}
+
 var lives = 3;
-var totalScore = 0;
+var totalScore = new Score();
 
 var xCoord = 0;
 var circleR = 15;
-
-var spawnInterval = 0.02;
-
-var stage = 1;
 
 capImg = new Image();
 capImg.src = "cap.png";
@@ -20,10 +36,10 @@ window.onmousemove = function(event) {
 };
 
 function randStartCoord() {
-  return Math.floor(Math.random() * 500) + 15;
+  return Math.floor(Math.random() * (c.width - 35)) + 15;
 }
 function randSpeed() {
-  return Math.floor(Math.random() * 2 * stage) + 2;
+  return Math.floor(Math.random() * 2 * totalScore.getStage()) + 2;
 }
 function update() {
   ctx.clearRect(0, 0, c.width, c.height);
@@ -34,7 +50,7 @@ function update() {
   player.draw();
 
   var spawnRandNum = Math.random();
-  if (spawnRandNum < spawnInterval) {
+  if (spawnRandNum < totalScore.getSpawnInterval()) {
     spawnCap();
   }
   for (let i = 0; i < caps.length; i++) {
@@ -52,12 +68,7 @@ function update() {
       element.x - player.x > 0
     ) {
       caps.splice(i, 1);
-      totalScore += 100;
-      if (totalScore % 2000 == 0) {
-        stage++;
-        spawnInterval += 0.005;
-      }
-      console.log(totalScore);
+      totalScore.add(100);
     }
   }
 }
