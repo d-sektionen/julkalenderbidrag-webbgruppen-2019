@@ -14,17 +14,11 @@ var stage = 1;
 capImg = new Image();
 capImg.src = "cap.png";
 
-c.onmousemove = function(event) {
+window.onmousemove = function(event) {
   rect = c.getBoundingClientRect();
   xCoord = event.clientX - rect.left;
 };
 
-function rectangle(x, y) {
-  ctx.beginPath();
-  ctx.rect(x, y, 100, 10);
-  ctx.fillStyle = "darkred";
-  ctx.fill();
-}
 function randStartCoord() {
   return Math.floor(Math.random() * 500) + 15;
 }
@@ -33,7 +27,10 @@ function randSpeed() {
 }
 function update() {
   ctx.clearRect(0, 0, c.width, c.height);
-  player.x = xCoord - 50;
+  player.x = xCoord - player.width / 2;
+  if (player.x < 10) player.x = 10;
+  var capRight = c.width - player.width - 10;
+  if (player.x > capRight) player.x = capRight;
   player.draw();
 
   var spawnRandNum = Math.random();
@@ -87,9 +84,14 @@ class Cup {
   constructor() {
     this.x = 30;
     this.y = c.height - 60;
+    this.width = 100;
+    this.height = 10;
   }
   draw() {
-    rectangle(this.x, this.y);
+    ctx.beginPath();
+    ctx.rect(this.x, this.y, this.width, this.height);
+    ctx.fillStyle = "darkred";
+    ctx.fill();
   }
 }
 var caps = [];
