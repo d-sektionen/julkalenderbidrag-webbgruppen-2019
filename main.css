@@ -5,7 +5,7 @@ html {
 
 body {
   height: 100%;
-  background-color: darkgreen;
+  background-color: hsl(112, 50%, 25%);
   margin: 0;
 }
 
@@ -22,8 +22,11 @@ body {
 .canvas-wrapper {
   position: relative;
   background-color: lightgray;
-  background: OliveDrab;
-  background: radial-gradient(lightgreen, OliveDrab);
+  background: hsla(112, 50%, 50%, 0.8);
+  background: radial-gradient(
+    hsla(112, 50%, 50%, 0.8),
+    hsla(112, 40%, 40%, 0.9)
+  );
 }
 
 .canvas-wrapper canvas {
@@ -31,6 +34,7 @@ body {
 }
 
 .canvas-wrapper .text-wrapper {
+  z-index: -1;
   position: absolute;
   pointer-events: none;
   display: flex;
@@ -46,14 +50,13 @@ body {
   margin: 0;
   /* font-style: italic; */
   font-size: 6rem;
-  color: rgba(0, 0, 0, 0.1);
 }
 
 .sidebar {
-  background-color: #bada55;
+  background-color: hsl(112, 60%, 50%);
 }
 
 .frame {
-  border: greenyellow 1rem solid;
+  border: hsl(112, 30%, 60%) 1rem solid;
   border-radius: 2rem;
 }
