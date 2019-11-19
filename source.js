@@ -71,6 +71,7 @@ function update() {
       totalScore.add(100);
     }
   }
+  window.requestAnimationFrame(update);
 }
 
 function spawnCap() {
@@ -108,4 +109,5 @@ class Cup {
 var caps = [];
 var player = new Cup();
 
-setInterval(update, 17);
+window.requestAnimationFrame(update);
+// setInterval(update, 17);
