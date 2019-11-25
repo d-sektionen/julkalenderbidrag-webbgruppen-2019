@@ -23,13 +23,13 @@ class Score {
     this.scoreCounter.textContent = this.value;
   }
   removeLife() {
-    this.lives--
+    this.lives--;
     var hearts = "";
     for (let i = 0; i < this.lives; i++) {
       hearts += "❤";
-    } 
+    }
     this.heartCounter.textContent = hearts;
-    if (this.lives < 1){
+    if (this.lives < 1) {
       this.lostScreen.classList.remove("hidden");
     }
   }
@@ -48,6 +48,11 @@ cupImg.src = "cup.png";
 window.onmousemove = function(event) {
   rect = c.getBoundingClientRect();
   xCoord = event.clientX - rect.left;
+};
+
+window.ontouchmove = function(event) {
+  rect = c.getBoundingClientRect();
+  xCoord = event.changedTouches[0].pageX - rect.left;
 };
 
 function randStartCoord() {
@@ -86,10 +91,9 @@ function update() {
       totalScore.add(100);
     }
   }
-  if (totalScore.lives > 0){
+  if (totalScore.lives > 0) {
     window.requestAnimationFrame(update);
   }
-    
 }
 
 function spawnCap() {
