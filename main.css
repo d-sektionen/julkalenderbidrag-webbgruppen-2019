@@ -76,7 +76,7 @@ body {
   border: hsl(112, 30%, 60%) 1rem solid;
   border-radius: 2rem;
 }
-.lost-screen{
+.lost-screen {
   display: grid;
   position: fixed;
   top: 0;
@@ -88,9 +88,10 @@ body {
   color: red;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0,0,0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
 }
-.hidden{
+.hidden {
   display: none;
 }
 .button {
@@ -101,6 +102,6 @@ body {
   border: solid 5px white;
   border-radius: 15px;
 }
-.button:hover{
+.button:hover {
   background-color: darkred;
 }
