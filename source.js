@@ -4,7 +4,10 @@ var ctx = c.getContext("2d");
 class Score {
   constructor() {
     this.value = 0;
+    this.lives = 3;
     this.scoreCounter = document.getElementById("scoreCounter");
+    this.heartCounter = document.getElementById("heartCounter");
+    this.lostScreen = document.getElementById("lostScreen");
   }
 
   getStage() {
@@ -19,16 +22,28 @@ class Score {
     this.value += amount;
     this.scoreCounter.textContent = this.value;
   }
+  removeLife() {
+    this.lives--
+    var hearts = "";
+    for (let i = 0; i < this.lives; i++) {
+      hearts += "❤";
+    } 
+    this.heartCounter.textContent = hearts;
+    if (this.lives < 1){
+      this.lostScreen.classList.remove("hidden");
+    }
+  }
 }
 
-var lives = 3;
 var totalScore = new Score();
 
 var xCoord = 0;
-var circleR = 15;
 
 capImg = new Image();
 capImg.src = "cap.png";
+
+cupImg = new Image();
+cupImg.src = "cup.png";
 
 window.onmousemove = function(event) {
   rect = c.getBoundingClientRect();
@@ -60,10 +75,10 @@ function update() {
 
     if (element.y > c.height) {
       caps.splice(i, 1);
-      lives--;
+      totalScore.removeLife();
     }
     if (
-      player.y - element.y <= circleR &&
+      player.y - element.y <= capImg.width &&
       element.x - player.x < 100 &&
       element.x - player.x > 0
     ) {
@@ -71,7 +86,10 @@ function update() {
       totalScore.add(100);
     }
   }
-  window.requestAnimationFrame(update);
+  if (totalScore.lives > 0){
+    window.requestAnimationFrame(update);
+  }
+    
 }
 
 function spawnCap() {
@@ -95,15 +113,12 @@ class BottleCap {
 class Cup {
   constructor() {
     this.x = 30;
-    this.y = c.height - 60;
-    this.width = 100;
+    this.y = c.height - 100;
+    this.width = cupImg.width;
     this.height = 10;
   }
   draw() {
-    ctx.beginPath();
-    ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = "darkred";
-    ctx.fill();
+    ctx.drawImage(cupImg, this.x, this.y - 30);
   }
 }
 var caps = [];

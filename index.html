@@ -10,7 +10,8 @@
 <body>
     <div class="main-grid">
         <div class="frame canvas-wrapper">
-            <div class="score" id="scoreCounter">0</div>
+            <div class="status-text score" id="scoreCounter">0</div>
+            <div class="status-text hearts" id="heartCounter">❤❤❤</div>
             <div class="text-wrapper">
                 <h2>
                     Webbgruppen
@@ -21,6 +22,7 @@
 
         <aside class="frame sidebar"></aside>
     </div>
+    <div class="lost-screen hidden" id="lostScreen"><span>Du förlorade! God jul :)</span><a class="button" href="index.html">Starta om</a></div>
     <script src="source.js"></script>
 </body>
 </html>

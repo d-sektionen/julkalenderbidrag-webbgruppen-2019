@@ -31,15 +31,22 @@ body {
   display: block;
 }
 
-.canvas-wrapper .score {
+.canvas-wrapper .status-text {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
   font: "sans-serif";
   color: red;
-  font-style: italic;
   font-weight: bold;
   font-size: 2rem;
+}
+
+.canvas-wrapper .score {
+  font-style: italic;
+  top: 1rem;
+  right: 1rem;
+}
+.canvas-wrapper .hearts {
+  bottom: 1rem;
+  left: 1rem;
 }
 
 .canvas-wrapper .text-wrapper {
@@ -68,4 +75,32 @@ body {
 .frame {
   border: hsl(112, 30%, 60%) 1rem solid;
   border-radius: 2rem;
+}
+.lost-screen{
+  display: grid;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 4rem;
+  font-family: "Lobster", cursive;
+  color: red;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0, 0.7);
+}
+.hidden{
+  display: none;
+}
+.button {
+  background-color: red;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border: solid 5px white;
+  border-radius: 15px;
+}
+.button:hover{
+  background-color: darkred;
 }
