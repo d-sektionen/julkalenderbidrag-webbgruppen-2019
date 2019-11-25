@@ -118,6 +118,7 @@ class Cup {
     this.height = 10;
   }
   draw() {
+    this.width = cupImg.width;
     ctx.drawImage(cupImg, this.x, this.y - 30);
   }
 }
