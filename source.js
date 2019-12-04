@@ -8,6 +8,7 @@ class Score {
     this.scoreCounter = document.getElementById("scoreCounter");
     this.heartCounter = document.getElementById("heartCounter");
     this.lostScreen = document.getElementById("lostScreen");
+    this.sidebar = document.getElementById("sidebar");
   }
 
   getStage() {
@@ -21,6 +22,11 @@ class Score {
   add(amount) {
     this.value += amount;
     this.scoreCounter.textContent = this.value;
+    const stage = this.getStage();
+    this.sidebar.style.backgroundImage = `url(capsphotos/${Math.min(
+      5,
+      stage
+    )}.jpg)`;
   }
   removeLife() {
     this.lives--;
@@ -39,10 +45,10 @@ var totalScore = new Score();
 
 var xCoord = 0;
 
-capImg = new Image();
+var capImg = new Image();
 capImg.src = "cap.png";
 
-cupImg = new Image();
+var cupImg = new Image();
 cupImg.src = "cup.png";
 
 window.onmousemove = function(event) {

@@ -10,7 +10,7 @@ body {
 
 .main-grid {
   display: grid;
-  grid-template-columns: auto 200px;
+  grid-template-columns: auto 500px;
   grid-template-rows: auto;
   justify-content: center;
   align-content: center;
@@ -70,6 +70,9 @@ body {
 
 .sidebar {
   background-color: hsl(112, 60%, 50%);
+  background-size: cover;
+  background-position: center;
+  background-image: url(capsphotos/1.jpg);
 }
 
 .frame {
