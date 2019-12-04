@@ -1,6 +1,24 @@
 var c = document.getElementById("c");
 var ctx = c.getContext("2d");
 
+const kaps = new Audio('sounds/konstkaps.mp3');
+
+var plopps = [new Audio('sounds/plopp4.mp3'),
+              new Audio('sounds/plopp2.mp3'),
+              new Audio('sounds/plopp1.mp3'),
+              new Audio('sounds/plopp3.mp3')];
+
+var sweardooms = [new Audio('sounds/helvete.mp3'),
+                  new Audio('sounds/fan.mp3'),
+                  new Audio('sounds/jarnspikar.mp3'),
+                  new Audio('sounds/capsans.mp3')];
+
+var slurps = [new Audio('sounds/slurp_tiny.mp3'),
+              new Audio('sounds/slurp_kort2.mp3'),
+              new Audio('sounds/slurp_medium.mp3'),
+              new Audio('sounds/slurp_long.mp3')];
+
+
 class Score {
   constructor() {
     this.value = 0;
@@ -9,10 +27,16 @@ class Score {
     this.heartCounter = document.getElementById("heartCounter");
     this.lostScreen = document.getElementById("lostScreen");
     this.sidebar = document.getElementById("sidebar");
+    this.lastSeenStage = 1;
   }
 
   getStage() {
-    return Math.floor(this.value / 2000) + 1;
+    var stage = Math.floor(this.value / 2000) + 1;
+    if (this.lastSeenStage !== stage) {
+      this.lastSeenStage = stage;
+      slurps[(stage-2)%slurps.length].play();
+    }
+    return stage;
   }
 
   getSpawnInterval() {
@@ -27,6 +51,10 @@ class Score {
       5,
       stage
     )}.jpg)`;
+    if (Math.random() < 0.05){
+      kaps.play();
+    }
+    plopps[Math.floor(Math.random()*plopps.length)].play();
   }
   removeLife() {
     this.lives--;
@@ -37,7 +65,13 @@ class Score {
     this.heartCounter.textContent = hearts;
     if (this.lives < 1) {
       this.lostScreen.classList.remove("hidden");
+      var eh = 3;
+      setInterval(function(){
+        sweardooms[eh].play();
+        eh = (eh + 1) % sweardooms.length;
+      },1000);
     }
+    sweardooms[this.lives % sweardooms.length].play();
   }
 }
 
@@ -50,6 +84,7 @@ capImg.src = "cap.png";
 
 var cupImg = new Image();
 cupImg.src = "cup.png";
+
 
 window.onmousemove = function(event) {
   rect = c.getBoundingClientRect();
@@ -135,5 +170,10 @@ class Cup {
 var caps = [];
 var player = new Cup();
 
-window.requestAnimationFrame(update);
+var startScreen = document.getElementById("startScreen");
+
+startScreen.onclick = function(){
+  window.requestAnimationFrame(update);
+  startScreen.remove();
+}
 // setInterval(update, 17);
