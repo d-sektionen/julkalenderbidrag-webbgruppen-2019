@@ -1,6 +1,12 @@
 var c = document.getElementById("c");
 var ctx = c.getContext("2d");
 
+var capImg = new Image();
+capImg.src = "cap.png";
+
+var cupImg = new Image();
+cupImg.src = "cupphotos/1.png";
+
 const kaps = new Audio('sounds/konstkaps.mp3');
 
 var plopps = [new Audio('sounds/plopp4.mp3'),
@@ -51,6 +57,7 @@ class Score {
       5,
       stage
     )}.jpg)`;
+    cupImg.src = `cupphotos/${Math.min(5,stage)}.png`
     if (Math.random() < 0.05){
       kaps.play();
     }
@@ -78,13 +85,6 @@ class Score {
 var totalScore = new Score();
 
 var xCoord = 0;
-
-var capImg = new Image();
-capImg.src = "cap.png";
-
-var cupImg = new Image();
-cupImg.src = "cup.png";
-
 
 window.onmousemove = function(event) {
   rect = c.getBoundingClientRect();
